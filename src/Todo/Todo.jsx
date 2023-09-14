@@ -6,12 +6,13 @@ export default function ToDo() {
 
     const [atividade ,setAtividade] = useState("");
     const [lista , setLista] = useState([]);
+    const [id , setId] = useState(Math.floor(Math.randoom(0,100)));
 
     const salvar = (e) => {
         e.preventDefault();
         setLista([...lista, {
             atividade: atividade
-            id: Math.floor(Math.randoom(0,100)),
+        id:id
         }]);
     };
 
