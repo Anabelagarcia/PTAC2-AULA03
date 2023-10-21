@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 
 export default function Todo() {
 
+    const listaLocalStorage = localStorage.getItem("Lista");
     const [atividade ,setAtividade] = useState("");
     const [lista , setLista] = useState([]);
     const [id , setId] = useState(Math.floor(Math.random(0,100)));
     const [preco , setPreco] = useState(0);
+
+    useEffect(() => {
+      const listaLocalStorageJson = JSON.parse(listaLocalStorage);
+      setLista(listaLocalStorageJson);
+    }, [listaLocalStorage]);
 
     const salvar = (e) => {
         e.preventDefault();
