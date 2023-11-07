@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 
 export default function Todo() {
 
-    const listaLocalStorage = localStorage.getItem("Lista");
+    const listaLocalStorage = JSON.parse(localStorage.getItem("Lista"));
     const [atividade ,setAtividade] = useState("");
-    const [lista , setLista] = useState([]);
-    const [id , setId] = useState(Math.floor(Math.random(0,100)));
+    const [lista , setLista] = useState( listaLocalStorage || []);
+    const [id , setId] = useState(listaLocalStorage[listaLocalStorage.length - 1]?.id + 1 || 1);
     const [preco , setPreco] = useState(0);
 
     useEffect(() => {
-      const listaLocalStorageJson = JSON.parse(listaLocalStorage);
-      setLista(listaLocalStorageJson);
-    }, [listaLocalStorage]);
+      localStorage.setItem("Lista", JSON.stringify(lista))
+    },[lista]);
+
 
     const salvar = (e) => {
         e.preventDefault();
@@ -167,6 +167,7 @@ export default function Todo() {
         <div class="row row-cols-4 mx-5" >
         
           {lista.map((atividade)=> ( 
+            <Link to={`/detalhe/${atividade.id}`}>
             <div class="col">
             <div class="card" key={atividade.id}>
             <div class="card-body" />
@@ -176,9 +177,11 @@ export default function Todo() {
               
             </div>
             </div>
+            </Link>
               ))}
         
             </div>
+            
             </div>
             );
           }

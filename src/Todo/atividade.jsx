@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 export default function Atividade() {
+
     const listaLocalStorage = JSON.parse(localStorage.getItem("Lista"));
     const [id,setId] = useState(listaLocalStorage[listaLocalStorage.length - 1]?.id + 1 || 1);
     const [atividade, setAtividade] = useState("");
@@ -16,5 +17,5 @@ export default function Atividade() {
         }]);
         setId(id+1);
         setAtividade("");
-
+}
 };
