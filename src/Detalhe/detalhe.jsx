@@ -1,12 +1,17 @@
 import { useParams } from "react-router-dom";
 
 export default function Detalhe(){
-     const {id}=useParams()
-    return(
-        <div>
-            <h1>olá {id}
+     const {id}=useParams();
+     const lista = JSON.parse( localStorage.getItem("Lista"));
 
-            </h1>
-        </div>
+     lista.filter( (objeto) => {
+        if(objeto.id == id){
+            return objeto;
+        }
+        return null;
+     })
+    return(
+        <h1>{id}</h1>
+        
     );
 }
